@@ -6,6 +6,8 @@ COPY top /usr/local/lib/python3.6/site-packages/top
 COPY requirements.txt ./requirements.txt
 # COPY rustup-init /tmp/rustup-init
 # RUN /tmp/rustup-init -y 
-RUN pip install --no-cache -i https://pypi.douban.com/simple Cython==0.29.22
+ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
+RUN pip install --no-cache -i https://pypi.douban.com/simple Cython==3.0a8 cryptography==3.4.7
+RUN pip install --no-cache -i https://pypi.douban.com/simple gevent==21.1.2 --no-build-isolation
 RUN pip install --no-cache -i https://pypi.douban.com/simple -r ./requirements.txt
 # RUN rustup self uninstall -y
